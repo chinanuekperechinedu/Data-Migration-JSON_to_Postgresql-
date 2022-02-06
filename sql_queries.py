@@ -9,36 +9,36 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 # CREATE TABLES
 
 songplay_table_create = ("""CREATE TABLE songplays (
-                                songplay_id bigserial not null primary key, 
+                                songplay_id bigserial primary key, 
                                 start_time timestamp, 
                                 user_id INT, 
                                 level varchar, 
-                                song_id varchar, 
-                                artist_id varchar, 
+                                song_id varchar NOT NULL, 
+                                artist_id varchar NOT NULL, 
                                 session_id int, 
                                 location varchar, 
                                 user_agent varchar);
 """)
 
 user_table_create = ("""CREATE TABLE users(
-                            user_id int not null PRIMARY KEY, 
-                            first_name varchar, 
+                            user_id int PRIMARY KEY, 
+                            first_name varchar NOT NULL, 
                             last_name varchar, 
                             gender char, 
                             level varchar);
 """)
 
 song_table_create = ("""CREATE TABLE songs(
-                            song_id varchar not null PRIMARY KEY, 
-                            title varchar, 
-                            artist_id varchar, 
+                            song_id varchar PRIMARY KEY, 
+                            title varchar NOT NULL, 
+                            artist_id varchar NOT NULL, 
                             year int, 
                             duration float);
 """)
 
 artist_table_create = ("""CREATE TABLE artists(
-                            artist_id varchar not null PRIMARY KEY, 
-                            artist_name varchar, 
+                            artist_id varchar PRIMARY KEY, 
+                            artist_name varchar NOT NULL, 
                             artist_location varchar, 
                             artist_latitude float, 
                             artist_longitude float);
@@ -66,7 +66,7 @@ user_table_insert = ("""
                         INSERT INTO users 
                             (user_id, first_name, last_name, gender, level)
                             VALUES(%s, %s, %s, %s, %s)
-                            ON CONFLICT DO NOTHING;
+                            ON CONFLICT (user_id) DO UPDATE SET level=EXCLUDED.level;
 """)
 
 song_table_insert = ("""
