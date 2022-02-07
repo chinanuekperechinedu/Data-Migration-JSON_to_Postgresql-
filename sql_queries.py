@@ -13,8 +13,8 @@ songplay_table_create = ("""CREATE TABLE songplays (
                                 start_time timestamp, 
                                 user_id INT, 
                                 level varchar, 
-                                song_id varchar NOT NULL, 
-                                artist_id varchar NOT NULL, 
+                                song_id varchar, 
+                                artist_id varchar, 
                                 session_id int, 
                                 location varchar, 
                                 user_agent varchar);
