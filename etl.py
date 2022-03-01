@@ -28,7 +28,6 @@ def process_song_file(cur, filepath):
     artist_data = df[['artist_id', 'artist_name', 'artist_location', 'artist_latitude', 'artist_longitude']].values[0].tolist()
     cur.execute(artist_table_insert, artist_data)
 
-
 def process_log_file(cur, filepath):
     """
     Description: This function can be used to read the file in the filepath (data/log_data)
@@ -83,7 +82,7 @@ def process_log_file(cur, filepath):
         songplay_data = ( row_t, row.userId, row.level, songid, artistid, row.sessionId, row.location, row.userAgent)
         cur.execute(songplay_table_insert, songplay_data)
 
-
+        
 def process_data(cur, conn, filepath, func):
     """
   Description: This function can be used to get all json files from the data directory as well as process them.
